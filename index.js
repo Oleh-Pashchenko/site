@@ -57,4 +57,4 @@ let text;
 
 app.use('/', express.static(public));
 
-app.listen(8080);
+app.listen(80);
