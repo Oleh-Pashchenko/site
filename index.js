@@ -6,6 +6,7 @@ var public = path.join(__dirname, 'public');
 var config = require('./config');
 var http = require('http');
 var https = require('https');
+var fs = require('fs');
 
 const TG = require('telegram-bot-api')
 
