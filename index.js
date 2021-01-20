@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+
 var path = require('path');
 var bodyParser = require('body-parser')
 var public = path.join(__dirname, 'public');
@@ -24,13 +25,6 @@ api.start()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-function ensureSec(req, res, next){
-    if (req.headers["x-forwarded-proto"] === "https"){
-       return next();
-    }
-    res.redirect("https://" + req.headers.host + req.url);  
-}
-app.use(ensureSec);
 app.get('/.well-known/acme-challenge/GjMaNG5Hj4qGIGH8dGtN-FOlaht_m2yagehNepuI59o', function(req, res) {
     res.sendFile(path.join(public, 'file.txt'));
 });
@@ -70,9 +64,13 @@ let text;
 
 app.use('/', express.static(public));
 
-http.createServer(app).listen(80, () => {
-    console.log('Listening...')
-  })
+const httpApp = express();
+httpApp.all('*', (req, res) => res.redirect(300, 'https://target-hunter.site'));
+const httpServer = http.createServer(httpApp);
+httpServer.listen(80, () => console.log(`HTTP server listening: https://target-hunter.site`));
+// http.createServer(app).listen(80, () => {
+//     console.log('Listening...')
+//   })
   
   https
     .createServer(
