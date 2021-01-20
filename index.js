@@ -65,7 +65,7 @@ let text;
 app.use('/', express.static(public));
 
 const httpApp = express();
-httpApp.all('*', (req, res) => res.redirect(300, 'https://target-hunter.site'));
+httpApp.all('*', (req, res) => res.redirect('https://target-hunter.site'));
 const httpServer = http.createServer(httpApp);
 httpServer.listen(80, () => console.log(`HTTP server listening: https://target-hunter.site`));
 // http.createServer(app).listen(80, () => {
