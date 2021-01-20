@@ -24,7 +24,13 @@ api.start()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+function ensureSec(req, res, next){
+    if (req.headers["x-forwarded-proto"] === "https"){
+       return next();
+    }
+    res.redirect("https://" + req.headers.host + req.url);  
+}
+app.use(ensureSec);
 app.get('/.well-known/acme-challenge/GjMaNG5Hj4qGIGH8dGtN-FOlaht_m2yagehNepuI59o', function(req, res) {
     res.sendFile(path.join(public, 'file.txt'));
 });
