@@ -4,6 +4,8 @@ var path = require('path');
 var bodyParser = require('body-parser')
 var public = path.join(__dirname, 'public');
 var config = require('./config');
+var http = require('http');
+var https = require('https');
 
 const TG = require('telegram-bot-api')
 
@@ -61,4 +63,19 @@ let text;
 
 app.use('/', express.static(public));
 
-app.listen(80);
+http.createServer(app).listen(80, () => {
+    console.log('Listening...')
+  })
+  
+  https
+    .createServer(
+      {
+        key: fs.readFileSync('/etc/letsencrypt/live/target-hunter.site/privkey.pem'),
+        cert: fs.readFileSync('/etc/letsencrypt/live/target-hunter.site/cert.pem'),
+        ca: fs.readFileSync('/etc/letsencrypt/live/target-hunter.site/chain.pem'),
+      },
+      app
+    )
+    .listen(443, () => {
+      console.log('Listening...')
+    })
