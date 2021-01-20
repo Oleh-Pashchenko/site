@@ -22,6 +22,10 @@ api.start()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.get('/.well-known/acme-challenge/nrznjyCv-dx8zqC_XuZEVwmaj_LBOHXkdNz83QWtZHU', function(req, res) {
+    res.sendFile(path.join(public, 'file.txt'));
+});
+
 app.get('/', function(req, res) {
     res.sendFile(path.join(public, 'index.html'));
 });
