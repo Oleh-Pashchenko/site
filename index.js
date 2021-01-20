@@ -22,7 +22,7 @@ api.start()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/..well-known/acme-challenge/GjMaNG5Hj4qGIGH8dGtN-FOlaht_m2yagehNepuI59o', function(req, res) {
+app.get('/.well-known/acme-challenge/GjMaNG5Hj4qGIGH8dGtN-FOlaht_m2yagehNepuI59o', function(req, res) {
     res.sendFile(path.join(public, 'file.txt'));
 });
 
