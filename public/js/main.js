@@ -157,6 +157,11 @@ $(function(){
         closeModal();        
     });
 
+
+    document.getElementById('btn-modal-close1').addEventListener('click', function () {
+        closeModal();        
+    });
+
     document.getElementById('overlay').addEventListener('click', function () {
         document.getElementById('overlay').classList.remove('is-visible');
         document.getElementById('modal').classList.remove('is-visible');
@@ -166,7 +171,11 @@ $(function(){
     function closeModal () {
         document.getElementById('overlay').classList.remove('is-visible');
         document.getElementById('modal').classList.remove('is-visible');
-        resetErrorState();
+
+console.log(1);
+        document.getElementById('overlay1').classList.remove('is-visible');
+        document.getElementById('modal1').classList.remove('is-visible');
+        // resetErrorState();
     }
     
 });

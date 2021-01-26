@@ -42,8 +42,12 @@ function send(name,phone,type, site = null, theme = null,clients = null) {
             theme: theme,
             clients: clients
         },
-        success:function () {
-            alert('Заявка успешно отправлена, оператор свяжется с вами в течении 30 минут!');
-        }
+        complete: function() {
+            document.getElementById('overlay').classList.remove('is-visible');
+            document.getElementById('modal').classList.remove('is-visible');
+
+            document.getElementById('overlay1').classList.add('is-visible');
+            document.getElementById('modal1').classList.add('is-visible');
+         }  
     })
 }
